@@ -1,6 +1,5 @@
 from django import template
-from settings import FACEBOOK_APPLICATION_INITIAL_PERMISSIONS
-
+from django.conf import settings
 register = template.Library()
 
 @register.tag
@@ -30,4 +29,4 @@ class FacebookNode(template.Node):
 
 @register.simple_tag
 def facebook_perms():
-    return ",".join(FACEBOOK_APPLICATION_INITIAL_PERMISSIONS)
+    return ",".join(getattr(settings, 'FACEBOOK_APPLICATION_INITIAL_PERMISSIONS', []))
